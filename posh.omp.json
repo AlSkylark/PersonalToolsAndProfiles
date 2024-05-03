@@ -1,10 +1,21 @@
 {
     "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-    "palette": {
-        "yellow": "#692f53",
-        "black": "#000",
-        "white": "#fff",
-        "git-blue": "#007cb6"
+    "palettes": {
+        "template": "{{if eq .Shell \"pwsh\"}}pwsh-palette{{else}}bash-palette{{end}}",
+        "list": {
+            "bash-palette": {
+                "yellow": "#9e3a00",
+                "black": "#000",
+                "white": "#fff",
+                "git-blue": "#007cb6"
+            },
+            "pwsh-palette": {
+                "yellow": "#754b81",
+                "black": "#000",
+                "white": "#fff",
+                "git-blue": "#007cb6"
+            }
+        }
     },
     "blocks": [
         {
@@ -34,13 +45,13 @@
                     "background": "p:git-blue",
                     "foreground": "p:white",
                     "properties": {
-                        "branch_max_length": 25,
-                        "fetch_stash_count": true,
+                        "branch_max_length": 0,
+                        "branch_icon": " \uf418 ",
                         "fetch_status": true,
                         "fetch_upstream_icon": true
                     },
                     "style": "plain",
-                    "template": "<p:black,p:git-blue>\ue0b0</> {{ .UpstreamIcon }}{{ .HEAD }} <p:git-blue,p:black>\ue0b0</>",
+                    "template": "<p:black,p:git-blue>\ue0b0</> {{ .UpstreamIcon }} {{.HEAD}} <p:git-blue,p:black>\ue0b0</>",
                     "type": "git"
                 }
             ],
