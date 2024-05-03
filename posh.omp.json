@@ -20,7 +20,6 @@
     "blocks": [
         {
             "alignment": "left",
-            "newline": true,
             "segments": [
                 {
                     "background": "p:black",
@@ -56,6 +55,18 @@
                 }
             ],
             "type": "prompt"
+        },
+        {
+            "alignment": "left",
+            "type": "prompt",
+            "newline": true,
+            "segments": [
+                {
+                    "style": "plain",
+                    "type": "text",
+                    "template": "$"
+                }
+            ]
         }
     ],
     "console_title_template": "Git Bash > {{ .Folder }}",
