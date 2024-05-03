@@ -4,16 +4,16 @@
         "template": "{{if eq .Shell \"pwsh\"}}pwsh-palette{{else}}bash-palette{{end}}",
         "list": {
             "bash-palette": {
-                "yellow": "#9e3a00",
-                "black": "#000",
+                "main": "#161b50",
+                "main-text": "#e6c541",
                 "white": "#fff",
-                "git-blue": "#007cb6"
+                "git-blue": "#3A96DD"
             },
             "pwsh-palette": {
-                "yellow": "#754b81",
-                "black": "#000",
+                "main": "#754b81",
+                "main-text": "#ffffff",
                 "white": "#fff",
-                "git-blue": "#007cb6"
+                "git-blue": "#3A96DD"
             }
         }
     },
@@ -22,26 +22,23 @@
             "alignment": "left",
             "segments": [
                 {
-                    "background": "p:black",
                     "foreground": "p:white",
                     "style": "diamond",
                     "type": "os",
                     "template": " {{.Icon}}  "
                 },
                 {
-                    "background": "p:yellow",
-                    "foreground": "p:white",
+                    "foreground": "p:main-text",
                     "properties": {
                         "folder_separator_icon": " \ue0b1",
                         "home_icon": "~",
                         "style": "folder"
                     },
                     "style": "plain",
-                    "template": "<p:yellow,p:black>\ue285</><p:black, p:yellow>\ue0b0</> \uea83 {{ .Path }} <p:yellow,p:black>\ue0b0</>",
+                    "template": "<p:main,transparent>\ue285</><transparent,p:main>\ue0b0</><foreground,p:main> \uea83 {{ .Path }} </><p:main,transparent>\ue0b0</>",
                     "type": "path"
                 },
                 {
-                    "background": "p:git-blue",
                     "foreground": "p:white",
                     "properties": {
                         "branch_max_length": 0,
@@ -50,7 +47,7 @@
                         "fetch_upstream_icon": true
                     },
                     "style": "plain",
-                    "template": "<p:black,p:git-blue>\ue0b0</> {{ .UpstreamIcon }} {{.HEAD}} <p:git-blue,p:black>\ue0b0</>",
+                    "template": "<transparent,p:git-blue>\ue0b0</><foreground,p:git-blue>{{if .UpstreamIcon}} {{ .UpstreamIcon }}{{end}}<i>{{.HEAD}}<i/> </><p:git-blue,transparent>\ue0b0</>",
                     "type": "git"
                 }
             ],
@@ -64,12 +61,12 @@
                 {
                     "style": "plain",
                     "type": "text",
-                    "template": "$"
+                    "template": "{{if matchP \"pwsh\" .Shell}}❯{{else}}${{end}}"
                 }
             ]
         }
     ],
-    "console_title_template": "Git Bash > {{ .Folder }}",
+    "console_title_template": "{{if matchP \"pwsh\" .Shell}}PowerShell{{else}}Git Bash{{end}} > {{ .Folder }}",
     "final_space": true,
     "version": 2
 }
