@@ -15,4 +15,4 @@ if ! [ -x "$RIDER_EXE" ]; then
   RIDER_EXE=rider
 fi
 
-(exec nohup "$RIDER_EXE" "$@" )  2>/dev/null &
+(exec nohup "$RIDER_EXE" "$@" >/dev/null 2>&1) &
