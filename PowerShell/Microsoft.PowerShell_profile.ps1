@@ -1,5 +1,10 @@
-oh-my-posh init pwsh --config "$env:USERPROFILE/posh.omp.json" | Invoke-Expression
-Import-Module posh-git
+function ImportPoshGit(){
+    if (-not (Get-Module -ListAvailable -Name posh-git)) { 
+        Install-Module posh-git -Scope CurrentUser -Force
+    }
+
+    Import-Module posh-git
+}
 
 function callnvm() {
     # Always use argument version if there is one
@@ -29,4 +34,7 @@ function callnvm() {
       Write-Host $response
     }
   }
-  Set-Alias nvmu -value "callnvm"
+
+oh-my-posh init pwsh --config "$env:USERPROFILE/posh.omp.json" | Invoke-Expression
+ImportPoshGit
+Set-Alias nvmu -value "callnvm"

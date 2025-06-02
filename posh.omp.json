@@ -1,72 +1,80 @@
 {
     "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
     "palettes": {
-        "template": "{{if eq .Shell \"pwsh\"}}pwsh-palette{{else}}bash-palette{{end}}",
         "list": {
             "bash-palette": {
+                "git-blue": "#3A96DD",
                 "main": "#161b50",
                 "main-text": "#e6c541",
-                "white": "#fff",
-                "git-blue": "#3A96DD"
+                "white": "#fff"
             },
             "pwsh-palette": {
+                "git-blue": "#3A96DD",
                 "main": "#754b81",
                 "main-text": "#ffffff",
-                "white": "#fff",
-                "git-blue": "#3A96DD"
+                "white": "#fff"
             }
-        }
+        },
+        "template": "{{if eq .Shell \"pwsh\"}}pwsh-palette{{else}}bash-palette{{end}}"
     },
+    "console_title_template": "{{if matchP \"pwsh\" .Shell}}PowerShell{{else}}Git Bash{{end}} > {{ .Folder }}",
     "blocks": [
         {
+            "type": "prompt",
             "alignment": "left",
             "segments": [
                 {
+                    "properties": {
+                        "cache_duration": "none"
+                    },
+                    "template": " {{.Icon}}  ",
                     "foreground": "p:white",
-                    "style": "diamond",
                     "type": "os",
-                    "template": " {{.Icon}}  "
+                    "style": "diamond"
                 },
                 {
-                    "foreground": "p:main-text",
                     "properties": {
+                        "cache_duration": "none",
                         "folder_separator_icon": " \ue0b1",
                         "home_icon": "~",
                         "style": "folder"
                     },
-                    "style": "plain",
                     "template": "<p:main,transparent>\ue285</><transparent,p:main>\ue0b0</><foreground,p:main> \uea83 {{ .Path }} </><p:main,transparent>\ue0b0</>",
-                    "type": "path"
+                    "foreground": "p:main-text",
+                    "type": "path",
+                    "style": "plain"
                 },
                 {
-                    "foreground": "p:white",
                     "properties": {
-                        "branch_max_length": 0,
                         "branch_icon": " \uf418 ",
+                        "branch_max_length": 0,
+                        "cache_duration": "none",
                         "fetch_status": true,
                         "fetch_upstream_icon": true
                     },
-                    "style": "plain",
                     "template": "<transparent,p:git-blue>\ue0b0</><foreground,p:git-blue>{{if .UpstreamIcon}} {{ .UpstreamIcon }}{{end}}<i>{{.HEAD}}<i/> </><p:git-blue,transparent>\ue0b0</>",
-                    "type": "git"
-                }
-            ],
-            "type": "prompt"
-        },
-        {
-            "alignment": "left",
-            "type": "prompt",
-            "newline": true,
-            "segments": [
-                {
-                    "style": "plain",
-                    "type": "text",
-                    "template": "{{if matchP \"pwsh\" .Shell}}❯{{else}}${{end}}"
+                    "foreground": "p:white",
+                    "type": "git",
+                    "style": "plain"
                 }
             ]
+        },
+        {
+            "type": "prompt",
+            "alignment": "left",
+            "segments": [
+                {
+                    "properties": {
+                        "cache_duration": "none"
+                    },
+                    "template": "{{if matchP \"pwsh\" .Shell}}❯{{else}}${{end}}",
+                    "type": "text",
+                    "style": "plain"
+                }
+            ],
+            "newline": true
         }
     ],
-    "console_title_template": "{{if matchP \"pwsh\" .Shell}}PowerShell{{else}}Git Bash{{end}} > {{ .Folder }}",
-    "final_space": true,
-    "version": 2
+    "version": 3,
+    "final_space": true
 }
